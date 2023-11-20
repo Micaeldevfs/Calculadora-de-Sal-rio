@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Salário</title>
+</head>
+<body>
+    <script>
+        var salario;
+        var aumento = "";
+        var novoSalario;
+
+        function PerguntarSalario() {
+            salario = parseFloat(prompt("Qual o salário do colaborador?"));
+
+            if (salario <= 1200) {
+                novoSalario = salario * 1.15;
+                aumento = "15%";
+            } else if (salario > 1200 && salario <= 2400) {
+                novoSalario = salario * 1.10;
+                aumento = "10%";
+            } else {
+                novoSalario = salario * 1.05;
+                aumento = "5%";
+            }
+        }
+
+        function calcularFerias() {
+            salario = parseFloat(prompt("Qual o salário do colaborador?"));
+            return salario + salario / 3;
+        }
+
+        function calcularDecimoTerceiro() {
+            return (salario * mesesTrabalhados) / 12;
+        }
+
+        while (true) {
+            var opcao = parseInt(prompt("Menu de opções:\n1. Novo salário\n2. Férias\n3. Décimo terceiro\n4. Sair\nDigite a opção desejada:"));
+
+            if (opcao === 4) {
+                break;
+            }
+
+            switch (opcao) {
+                case 1:
+                    PerguntarSalario();
+                    alert(`Seu novo salário teve um aumento de ${aumento} agora passará a ser: R$ ${novoSalario.toFixed(2)}`);
+                    break;
+                case 2:
+                    var valorFerias = calcularFerias(salario);
+                    alert(`O valor de ferias do colaborador acrescido de um terço será de:R$ ${valorFerias.toFixed(2)}`);
+                    break;
+                case 3:                    
+                    var mesesTrabalhados = parseInt(prompt("Digite o número de meses de trabalho (no máximo 12):"));
+                    salario = parseFloat(prompt("Qual o salário do colaborador?"));
+                    if (mesesTrabalhados <= 12) {
+                        var valorDecimoTerceiro = calcularDecimoTerceiro(salario, mesesTrabalhados);
+                        alert(`Valor do décimo terceiro: R$ ${valorDecimoTerceiro.toFixed(2)}`);
+                    } else {
+                        alert("Número de meses de trabalho inválido. O máximo é 12.");
+                    }
+                    break;
+                default:
+                    alert("Opção inválida. Tente novamente.");
+            }
+        }
+    </script>
+</body>
+</html>
